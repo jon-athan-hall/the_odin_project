@@ -1,26 +1,26 @@
-def caesar_cipher(message, shift_factor)
-  chars = message.chars # Make an array of all characters.
+def substrings(words, dictionary)
+  all_words = words.split(" ") # Split string into an array of all words.
 
-  chars.map! do |c|
-    ascii_code = c.ord # Turn character into ascii.
+  # Reduce the dictionary starting with an empty hash for the accumulator.
+  dictionary.reduce({}) do |accumulator, sub_word|
+    sub_count = 0 # The substring occurs zero times to start.
 
-    # Only shift the letters a-z and A-Z.
-    if ascii_code.between? 65, 90
-      ascii_code = (ascii_code + shift_factor - 64) % 26 + 64
-    elsif ascii_code.between? 97, 122
-      ascii_code = (ascii_code + shift_factor - 96) % 26 + 96
+    # Go through each word and scan it for the substring. Add to sub_count
+    # along the way. The scan method returns an array of indexes for each
+    # occurrence, but only the size of that array is needed.
+    all_words.each { |w| sub_count = sub_count + w.downcase.scan(sub_word.downcase).count }
+
+    # Don't add a key/value the accumulator hash if the count is 0.
+    if sub_count > 0
+      accumulator.merge({ sub_word => sub_count })
+    else
+      accumulator
     end
-
-    ascii_code.chr # Turn ascii back into character.
   end
-
-  chars.join # Mush the array back into a single string.
 end
 
-puts "Enter a message to run through the caesar cypher: "
-input = gets.chomp
+dictionary = ["below", "down", "go", "going", "horn", "how", "howdy", "it", "i", "low", "own", "part", "partner", "sit"]
 
-puts "Enter the shift factor (1 - 25): "
-shift = gets.chomp.to_i
+puts substrings("below", dictionary)
 
-puts caesar_cipher(input, shift)
+puts substrings("Howdy partner, sit down! How's it going?", dictionary)

@@ -17,4 +17,10 @@ def caesar_cipher(message, shift_factor)
   chars.join # Mush the array back into a single string.
 end
 
-puts caesar_cipher("What a string!", 5)
+puts "Enter a message to run through the caesar cypher: "
+input = gets.chomp
+
+puts "Enter the shift factor (1 - 25): "
+shift = gets.chomp.to_i
+
+puts caesar_cipher(input, shift)

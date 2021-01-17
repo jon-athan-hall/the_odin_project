@@ -2,7 +2,7 @@ def caesar_cipher(message, shift_factor)
   chars = message.chars # Make an array of all characters.
 
   chars.map! do |c|
-    ascii_code = c.ord.to_i # Turn character into ascii.
+    ascii_code = c.ord # Turn character into ascii.
 
     # Only shift the letters a-z and A-Z.
     if ascii_code.between? 65, 90

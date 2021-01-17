@@ -14,7 +14,7 @@ def caesar_cipher(message, shift_factor)
     ascii_code.chr # Turn ascii back into character.
   end
 
-  letters.join # Mush the array back into a single string.
+  chars.join # Mush the array back into a single string.
 end
 
 puts "Enter a message to run through the caesar cypher: "
